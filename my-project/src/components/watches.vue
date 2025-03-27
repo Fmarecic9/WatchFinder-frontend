@@ -1,7 +1,7 @@
 <template>
     <div v-if="watches">
-        <div v-for="w, in watches" :key="w._id">
-            {{w.watch}}
+        <div v-for="w in watches" :key="w">
+           <h3> {{w.brand}}  {{w.model}} </h3>
         </div>
     </div>
 </template>

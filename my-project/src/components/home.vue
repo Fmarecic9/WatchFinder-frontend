@@ -8,7 +8,7 @@
          <router-view></router-view>
          <div>
         <hr>
-         <watches></watches>
+         <watches/>
          </div>
     </div>
 

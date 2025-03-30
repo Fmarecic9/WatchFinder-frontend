@@ -1,7 +1,7 @@
 <template>
     <div v-if="watches">
         <div v-for="w in watches" :key="w">
-           <h3> {{w.brand}}  {{w.model}} </h3>
+           <h3> <router-link :to= "`/watch/${w._id}`">{{w.brand}} {{w.model}}</router-link></h3>
         </div>
     </div>
 </template>
@@ -16,6 +16,7 @@ import {ref, onMounted } from 'vue'
 import axios from 'axios'
 
 let watches = ref([])
+
 
 onMounted (async()=>{
     try{

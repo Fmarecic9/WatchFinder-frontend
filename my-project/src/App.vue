@@ -3,6 +3,6 @@ import home from './components/home.vue'
 </script>
 
 <template>
-    <home/>
+    <router-view />
 </template>
 

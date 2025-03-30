@@ -42,10 +42,12 @@
 <script setup>
 import axios from 'axios'
 import {ref, onMounted} from 'vue'
+import {useRouter} from 'vue-router'
 
 let username = ref("")
 let password = ref("")
 
+const router = useRouter()
 
 const userLogin = async() =>{
     const loginData = {
@@ -53,10 +55,16 @@ const userLogin = async() =>{
         password: password.value
     }
     try{
-        await axios.post('http://localhost:3000/users/login', loginData)
+        let response = await axios.post('http://localhost:3000/users/login', loginData)
+    
         username.value = ""
         password.value = ""
+
+        localStorage.setItem('token', response.data.jwt);
+        localStorage.setItem('role', response.data.role);
+
         alert("Success")
+        router.push('/home')
     }
     catch(e){
         alert("Wrong login data")

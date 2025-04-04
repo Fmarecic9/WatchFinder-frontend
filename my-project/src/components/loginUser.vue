@@ -60,11 +60,14 @@ const userLogin = async() =>{
         username.value = ""
         password.value = ""
 
+    
+        localStorage.setItem('user', response.data.user);
         localStorage.setItem('token', response.data.jwt);
         localStorage.setItem('role', response.data.role);
 
-        alert("Success")
-        router.push('/home')
+        setTimeout(() => {
+          router.push('/home'); 
+        }, 100);
     }
     catch(e){
         alert("Wrong login data")
@@ -72,8 +75,5 @@ const userLogin = async() =>{
         password.value = ""
         console.error(`Error: ${e}`)
     }
-
-
 } 
-
 </script>

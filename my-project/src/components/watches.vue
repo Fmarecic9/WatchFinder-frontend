@@ -2,6 +2,7 @@
     <div v-if="watches">
          <button v-if="role === 'admin'" @click="addWatch">Add Watch</button>
          <button v-if="role === 'admin'" @click="addWatch">Inbox</button>
+        
         <div v-for="w in watches" :key="w._id">
            <h3> <router-link :to= "`/watch/${w._id}`">{{w.brand}} {{w.model}}</router-link></h3>
             <div v-if="role === 'admin'">
@@ -9,7 +10,6 @@
                 <button @click="deleteWatch(w._id)">Delete</button>
             </div>
         </div>
-           
     </div>
 
 </template>
@@ -21,11 +21,14 @@
 
 <script setup>
 import {ref, onMounted } from 'vue'
+import {useRoute, useRouter} from 'vue-router'
 import axios from 'axios'
 
+const route = useRoute()
+const router = useRouter()
 
 let watches = ref([])
-let role = localStorage.getItem('role')
+let role = ref(localStorage.getItem('role')) 
 
 
 
@@ -41,17 +44,27 @@ onMounted (async()=>{
         console.error(`Error: ${e}`)
     }
 })
+
 const editWatch = (id) => {
-    console.log('Editing watch with ID:', id);
+    router.push(`/editWatch/${id}`)
 };
 
-const deleteWatch = (id) => {
-    console.log('Deleting watch with ID:', id);
+const deleteWatch = async(id) => {
+    const token = localStorage.getItem('token');
+    const isConfirmed = confirm("Are you sure you want to delete this watch?");
+    if (!isConfirmed) return
+    try{
+        await axios.delete(`http://localhost:3000/watches/${id}`, 
+        { headers: { Authorization: `Bearer ${token}` }})
+        window.location.reload();
+    }
+    catch(e){
+        console.error(`Not good: ${e}`)
+    }
 };
 
 const addWatch = () => {
-    console.log('Adding a new watch');
+    router.push('/addWatch')
 };
-
 
 </script>

@@ -6,6 +6,8 @@
     <p>Type: {{ watch.type }}</p>
     <p>Dimensions: {{watch.length}}x{{watch.width}}x{{watch.height}} mm</p>
     <p>Price: {{watch.price}}€</p>
+    <button @click="addToWishlist(watch._id)">Add to Wishlish</button>
+    <button @click="addToOwnedWatches(watch._id)">Add to Owned watches</button>
   </div>
   <div v-else>
     <p>Loading watch details...</p>
@@ -27,19 +29,24 @@ let watch = ref(null)
 
 const goBack = () =>{
   router.push('/home')
-
 }
 
+let idWatch = route.params.id
 onMounted(async()=>{
-    let idWatch = route.params.id
     try{
         let response = await axios.get(`http://localhost:3000/watches/${idWatch}`)
-        console.log("API Response:", response.data); 
         watch.value = response.data.watch
     }
     catch(e){
         console.error(`Error: ${e}`)
     }
 })
-    
+
+const addToWishlist = (idWatch) =>{
+  console.log(idWatch)
+}
+
+const addToOwnedWatches = (idWatch) =>{
+  console.log(idWatch)
+}
 </script>

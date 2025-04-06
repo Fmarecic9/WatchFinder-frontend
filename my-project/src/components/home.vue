@@ -3,7 +3,7 @@
       <div class="kao-navbar">
         <h1 class="naslo">WatchFinder</h1>
        <div v-if="user" class="logout-button">
-            <p class="username-display">{{user}}</p>
+            <button @click="goToProfile">View profile</button>
             <button @click="logout">Logout</button>
         </div>
      <div v-else class="button-container">
@@ -44,19 +44,22 @@
   margin-block-start: 0;
   margin-block-end: 0;
 }
-.username-display{
-  color: white;
-}
 </style>
+
 <script setup>
 import watches from './watches.vue'
 import axios from 'axios'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import {ref,onMounted} from 'vue'
+
+const router = useRouter()
 
 let user = ref(null);
 let role = ref(null);
 
+const goToProfile = () =>{
+  router.push('/profile')
+}
 
 const checkUser = () =>{
   user.value = localStorage.getItem("user")

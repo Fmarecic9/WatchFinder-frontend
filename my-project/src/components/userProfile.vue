@@ -6,7 +6,7 @@
         <div v-if="ownedWatches.length">
             <h2>Owned Watches:</h2>
         <div v-for="watch in ownedWatches" :key="watch._id">
-            <p>{{ watch.brand }} {{ watch.model }}</p>
+            <p>{{ watch.brand }} {{ watch.model }} <button  @click="removeFromOwned(watch._id)">Remove</button></p>
         </div>
         </div>
         <div v-else>
@@ -16,7 +16,7 @@
         <div v-if="wishlist.length">
             <h2>Wishlist:</h2>
         <div v-for="watch in wishlist" :key="watch._id">
-            <p>{{ watch.brand }} {{ watch.model }}</p>
+            <p>{{ watch.brand }} {{ watch.model }} <button @click="removeFromWishlist(watch._id)">Remove</button></p>
         </div>
         </div>
         <div v-else>
@@ -46,23 +46,46 @@ let user = ref(null)
 const goBack = () =>{
   router.push('/home')
 }
+const token = localStorage.getItem("token")
 
 onMounted (async()=>{
-    const token = localStorage.getItem("token")
     try{
-        let response = await axios.get('http://localhost:3000/userProfile',
+        let response = await axios.get('http://localhost:3000/profile',
          { headers: { Authorization: `Bearer ${token}` }})
 
         ownedWatches.value = response.data.ownedWatches || []
         wishlist.value = response.data.wishlist || []
         user.value = response.data.user 
-
     }
     catch(e){
         console.error(`Error: ${e}`)
-    
     }
-
 })
 
+const removeFromWishlist = async(idWatch) =>{
+    const confirmed = confirm("Are you sure you want to remove watch from wishlist?")
+    if (!confirmed){ return }
+    try{
+        axios.patch(`http://localhost:3000/profile/wishlist/${idWatch}`, {}, 
+        { headers: { Authorization: `Bearer ${token}` }})
+        window.location.reload()
+    }
+  catch(e){
+        console.error(`Error: ${e}`)
+    }
+}
+
+const removeFromOwned = async(idWatch) =>{
+    const confirmed = confirm("Are you sure you want to remove watch from owned watches?")
+    if (!confirmed){ return }
+    try{
+        axios.patch(`http://localhost:3000/profile/owned/${idWatch}`, {},
+        { headers: { Authorization: `Bearer ${token}` }})
+        window.location.reload()
+  
+    }
+    catch(e){
+        console.error(`Error: ${e}`)
+    }
+}
 </script>

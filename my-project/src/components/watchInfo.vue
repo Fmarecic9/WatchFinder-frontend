@@ -26,12 +26,16 @@ const route = useRoute()
 const router = useRouter()
 
 let watch = ref(null)
+let user = ref(null)
+
+const token = localStorage.getItem("token")
+
+let idWatch = route.params.id
 
 const goBack = () =>{
   router.push('/home')
 }
 
-let idWatch = route.params.id
 onMounted(async()=>{
     try{
         let response = await axios.get(`http://localhost:3000/watches/${idWatch}`)
@@ -42,11 +46,30 @@ onMounted(async()=>{
     }
 })
 
-const addToWishlist = (idWatch) =>{
-  console.log(idWatch)
+const addToWishlist = async(idWatch) =>{
+  try{
+      await axios.post(`http://localhost:3000/profile/wishlist/${idWatch}`, 
+      {},
+      { headers: { Authorization: `Bearer ${token}` }})
+      alert("Added to wishlist")
+      router.push('/profile')
+  }
+  catch(e){
+    console.error(`Error:  ${e}`)
+  }
 }
 
-const addToOwnedWatches = (idWatch) =>{
-  console.log(idWatch)
+const addToOwnedWatches = async(idWatch) =>{
+  try{
+      await axios.post(`http://localhost:3000/profile/owned/${idWatch}`, 
+      {},
+      { headers: { Authorization: `Bearer ${token}` }})
+      alert("Added to owned watches")
+      router.push('/profile')
+  }
+
+  catch(e){
+    console.error(`Error: ${e}`)
+  }
 }
 </script>

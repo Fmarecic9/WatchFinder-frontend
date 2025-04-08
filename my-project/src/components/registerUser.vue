@@ -58,7 +58,8 @@ import axios from 'axios'
 import {ref, onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 
-// 
+const router = useRouter()
+
 let username = ref("")
 let email = ref("")
 let password = ref("")
@@ -75,6 +76,7 @@ const registerUser = async() => {
         email.value = ""
         password.value = ""
         alert('Registered')
+        router.push('/login')
 
     }
     catch(e){

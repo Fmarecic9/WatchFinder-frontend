@@ -4,7 +4,9 @@
          <button v-if="role === 'admin'" @click="goToInbox">Inbox</button>
          <button v-if="role === 'user'" @click="sendMessage">Send a message</button>
         
+       
         <div v-for="w in watches" :key="w._id">
+        <span><img :src="w.images[0]" alt="Watch Image" style="width: 200px; height: auto;" /></span>
            <h3> <router-link :to= "`/watch/${w._id}`">{{w.brand}} {{w.model}}</router-link></h3>
             <div v-if="role === 'admin'">
                 <button @click="editWatch(w._id)">Edit</button>

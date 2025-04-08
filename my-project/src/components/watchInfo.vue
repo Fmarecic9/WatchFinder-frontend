@@ -2,10 +2,17 @@
    <div v-if="watch">
     <button @click="goBack">Back</button>
     <h1>{{ watch.brand }} {{ watch.model }}</h1>
+    <span v-for="(image, index) in watch.images" :key="index">
+      <img :src="image" alt="Watch Image" style="width: 200px; height: auto;" />
+    </span>
+    <strong><p> {{watch.price}}€</p></strong>
     <p>Color: {{ watch.color }}</p>
     <p>Type: {{ watch.type }}</p>
-    <p>Dimensions: {{watch.length}}x{{watch.width}}x{{watch.height}} mm</p>
-    <p>Price: {{watch.price}}€</p>
+    <p>Dimensions: {{watch.dimensions.length}}x{{watch.dimensions.width}}x{{watch.dimensions.height}} mm</p>
+    Features
+    <span v-for="(feature, index) in watch.features" :key="index">
+      <p>{{feature}}</p>
+    </span>
     <button @click="addToWishlist(watch._id)">Add to Wishlish</button>
     <button @click="addToOwnedWatches(watch._id)">Add to Owned watches</button>
   </div>

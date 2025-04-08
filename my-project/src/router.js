@@ -6,6 +6,8 @@ import home from './components/home.vue'
 import addWatchForm from './components/addWatchForm.vue'
 import editWatchForm from './components/editWatchForm.vue'
 import userProfile from './components/userProfile.vue'
+import adminInbox from './components/inboxMessages.vue'
+import userMessages from './components/sendMessage.vue'
 
 const routes = [
     {path: '/', redirect: '/home'},
@@ -15,7 +17,9 @@ const routes = [
     {path: '/watch/:id', name: 'watchInfo', component: watchInfo},
     {path: '/addWatch', name: 'addWatch', component: addWatchForm},
     {path: '/editWatch/:id', name: 'editWatch', component: editWatchForm},
-    {path: '/profile', name: 'userProfile', component: userProfile}
+    {path: '/profile', name: 'userProfile', component: userProfile},
+    {path: '/inbox', name: 'adminInbox', component: adminInbox},
+    {path: '/send', name: 'userMessages', component: userMessages}
 
 
 ]

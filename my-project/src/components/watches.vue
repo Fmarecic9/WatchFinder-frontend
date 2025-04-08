@@ -1,7 +1,8 @@
 <template>
     <div v-if="watches">
          <button v-if="role === 'admin'" @click="addWatch">Add Watch</button>
-         <button v-if="role === 'admin'" @click="addWatch">Inbox</button>
+         <button v-if="role === 'admin'" @click="goToInbox">Inbox</button>
+         <button v-if="role === 'user'" @click="sendMessage">Send a message</button>
         
         <div v-for="w in watches" :key="w._id">
            <h3> <router-link :to= "`/watch/${w._id}`">{{w.brand}} {{w.model}}</router-link></h3>
@@ -29,7 +30,6 @@ const router = useRouter()
 
 let watches = ref([])
 let role = ref(localStorage.getItem('role')) 
-
 
 
 onMounted (async()=>{
@@ -66,5 +66,13 @@ const deleteWatch = async(id) => {
 const addWatch = () => {
     router.push('/addWatch')
 };
+
+const goToInbox = () => {
+    router.push('/inbox')
+};
+
+const sendMessage = () =>{
+    router.push('/send')
+}
 
 </script>

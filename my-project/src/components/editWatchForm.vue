@@ -1,59 +1,120 @@
 <template>
-  <div v-if="role === 'admin'">
+  <div v-if="role === 'admin'" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Edit Watch</h2>
+
     <div v-if="watch">
-        <form @submit.prevent="editWatch(watchId)">
-        <label>Brand: </label>
-        <input v-model="watch.brand" placeholder="Brand" />
-        <label>Model: </label>
-        <input v-model="watch.model" placeholder="Model" />
-        <label>Price: </label>
-        <input v-model="watch.price" type="number" placeholder="Price" />
-        <label>Color: </label>
-        <input v-model="watch.color" placeholder="Color" />
-        <label>Type: </label>
-        <input v-model="watch.type" placeholder="Type" />
-        <label>Material(housing): </label>
-        <input v-model="watch.materialHousing" placeholder="Material Housing" />
-        <label>Material(bracelet):</label>
-        <input v-model="watch.materialBracelet" placeholder="Material Bracelet" />
-        <label>Bracelet diameter</label>
-        <input v-model="watch.braceletDiameter" placeholder="Bracelet Diameter" />
-        <label>Weight(grams): </label>
-        <input v-model="watch.weight" placeholder="Weight" />
-        <label>Length(mm): </label>
-        <input v-model="watch.dimensions.length" placeholder="Length" />
-        <label>Width(mm): </label>
-        <input v-model="watch.dimensions.width" placeholder="Width" />
-        <label>Height(mm): </label>
-        <input v-model="watch.dimensions.height" placeholder="Height" />
-        
-          
-      <h3>Features</h3>
-      <div v-for="(feature, index) in watch.features" :key="index">
-        <input v-model="watch.features[index]" placeholder="Edit features" />
+      <form @submit.prevent="editWatch(watchId)" class="space-y-4">
+        <div class="flex flex-col">
+          <label class="text-gray-700 font-medium">Brand:</label>
+          <input v-model="watch.brand" placeholder="Brand" 
+                 class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+        </div>
 
-      </div>
+        <div class="flex flex-col">
+          <label class="text-gray-700 font-medium">Model:</label>
+          <input v-model="watch.model" placeholder="Model"
+                 class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+        </div>
 
-      
-      <h3>Images</h3>
-       <div v-for="(imageUrl, index) in watch.images" :key="index">
-        <input v-model="watch.images[index]" placeholder="Edit images" />
-        
-      </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col">
+            <label class="text-gray-700 font-medium">Price:</label>
+            <input v-model="watch.price" type="number" placeholder="Price"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div class="flex flex-col">
+            <label class="text-gray-700 font-medium">Color:</label>
+            <input v-model="watch.color" placeholder="Color"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
 
-        <button type="submit">Update Watch</button>
+        <div class="flex flex-col">
+          <label class="text-gray-700 font-medium">Type:</label>
+          <input v-model="watch.type" placeholder="Type"
+                 class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <h3 class="text-lg font-semibold text-gray-800 mt-4">Materials & Dimensions</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col">
+            <label class="text-gray-700 font-medium">Material (Housing):</label>
+            <input v-model="watch.materialHousing" placeholder="Material Housing"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div class="flex flex-col">
+            <label class="text-gray-700 font-medium">Material (Bracelet):</label>
+            <input v-model="watch.materialBracelet" placeholder="Material Bracelet"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4">
+          <div class="flex flex-col">
+            <label class="text-gray-700 font-medium">Bracelet Diameter:</label>
+            <input v-model="watch.braceletDiameter" placeholder="Bracelet Diameter"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div class="flex flex-col">
+            <label class="text-gray-700 font-medium">Weight (grams):</label>
+            <input v-model="watch.weight" placeholder="Weight"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-gray-800 mt-4">Dimensions (mm)</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="flex flex-col">
+            <label class="text-gray-700 font-medium">Length:</label>
+            <input v-model="watch.dimensions.length" placeholder="Length"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div class="flex flex-col">
+            <label class="text-gray-700 font-medium">Width:</label>
+            <input v-model="watch.dimensions.width" placeholder="Width"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div class="flex flex-col">
+            <label class="text-gray-700 font-medium">Height:</label>
+            <input v-model="watch.dimensions.height" placeholder="Height"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-gray-800 mt-4">Features</h3>
+        <div class="flex flex-col">
+          <label class="text-gray-700 font-medium">Edit Features:</label>
+          <div v-for="(feature, index) in watch.features" :key="index" class="flex space-x-2">
+            <input v-model="watch.features[index]" placeholder="Edit features"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-gray-800 mt-4">Images</h3>
+        <div class="flex flex-col">
+          <label class="text-gray-700 font-medium">Edit Images:</label>
+          <div v-for="(imageUrl, index) in watch.images" :key="index" class="flex space-x-2">
+            <input v-model="watch.images[index]" placeholder="Edit images"
+                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
+          Update Watch
+        </button>
       </form>
     </div>
 
-    <div v-else>
-        <p>Loading..</p>
+    <div v-else class="text-center text-gray-600 mt-4">
+      <p>⏳ Loading...</p>
     </div>
   </div>
-  <div v-else>
-        <p>You are not an admin</p>
-    </div>
 
+  <div v-else class="max-w-lg mx-auto bg-red-100 text-red-600 text-center p-4 rounded-lg shadow-md">
+    <h1 class="text-xl font-semibold">⚠ You are not an admin</h1>
+  </div>
 </template>
+
 
 
 

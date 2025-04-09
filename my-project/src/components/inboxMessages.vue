@@ -1,7 +1,9 @@
 <template>
+<div>
+<button @click="goBack" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 ">Back</button>
   <div v-if="role === 'admin'" class="w-96 mx-auto text-gray-700 rounded bg-white shadow-md">
     <div class="head flex border p-3 rounded-t bg-gray-600 text-white">
-      <h2 class="text-xl font-semibold">Inbox</h2>
+      <h2 class="text-xl font-semibold">Inbox</h2>  
       <div class="count border p-1 px-2 font-semibold bg-red-500 text-white rounded-full text-xs cursor-pointer font-mono ml-2">
         {{ messages.length }}
       </div>
@@ -24,6 +26,7 @@
   <div v-else class="max-w-md mx-auto bg-red-100 text-red-600 text-center p-4 rounded-lg shadow-md">
     <h1 class="text-xl font-semibold">⚠ You are not an admin, how did you get here?</h1>
   </div>
+</div>
 </template>
 
 <script setup>

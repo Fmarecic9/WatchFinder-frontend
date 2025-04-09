@@ -1,5 +1,6 @@
 <template>
   <div v-if="role === 'admin'" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+     <button @click="goBack" class="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Back</button>
     <h2 class="text-2xl font-bold text-gray-800 mb-4">Add a New Watch</h2>
 
     <form @submit.prevent="addWatch" class="space-y-4">
@@ -115,6 +116,9 @@ const addImageUrl = () => {
     watch.value.images.push(imageUrlInput.value.trim());
     imageUrlInput.value = '';
   }
+}
+const goBack=()=>{
+  router.push('/home')
 }
 
 const addWatch = async () => {

@@ -1,5 +1,5 @@
 <template>
-<div class="bg-gray-600">
+<div class="bg-gray-700">
       <div class="text-center">
         <h1 class="text-2xl font-medium center text-white">WatchFinder</h1>
        <div v-if="user" class="text-right text-white font-medium">

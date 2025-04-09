@@ -33,7 +33,7 @@
         <div v-if="wishlist.length">
           <div v-for="watch in wishlist" :key="watch._id" class="bg-gray-100 p-4 rounded-md shadow-sm flex justify-between items-center mt-2">
             <p class="text-gray-700 text-center">{{ watch.brand }} {{ watch.model }}</p>
-            <button @click="removeFromWishlist(watch._id)" class="mt-2 text-red-500 hover:underline">Remove</button>
+            <button @click="removeFromWishlist(watch._id)" class="text-red-500 hover:underline">Remove</button>
           </div>
         </div>
         <div v-else class="text-gray-500 mt-4">No watches on your wishlist.</div>

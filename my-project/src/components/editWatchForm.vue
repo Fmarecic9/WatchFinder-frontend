@@ -1,5 +1,6 @@
 <template>
   <div v-if="role === 'admin'" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+     <button @click="goBack" class="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Back</button>
     <h2 class="text-2xl font-bold text-gray-800 mb-4">Edit Watch</h2>
 
     <div v-if="watch">
@@ -158,4 +159,8 @@ const editWatch = async(watchId) => {
         console.error(`Not good: ${e}`)
     }
 };
+
+const goBack=()=>{
+  router.push('/home')
+}
 </script>

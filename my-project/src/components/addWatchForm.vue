@@ -82,7 +82,6 @@ const watch = ref({
   type: '',
   materialHousing: '',
   materialBracelet: '',
-  braceletDiameter: '',
   weight: '',
   dimensions: {
     length: '',
@@ -101,7 +100,6 @@ const watchFields = [
   { name: 'type', label: 'Type', type: 'text' },
   { name: 'materialHousing', label: 'Material (Housing)', type: 'text' },
   { name: 'materialBracelet', label: 'Material (Bracelet)', type: 'text' },
-  { name: 'braceletDiameter', label: 'Bracelet Diameter', type: 'number' },
   { name: 'weight', label: 'Weight', type: 'number' },
 ];
 

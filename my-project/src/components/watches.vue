@@ -2,7 +2,8 @@
     <div v-if="watches" class="bg-white w-full px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <button v-if="role === 'admin'" @click="addWatch" class="mr-1 mr-1 px-3 py-1 bg-green-800 text-white rounded">Add Watch</button> 
         <button v-if="role === 'admin'" @click="goToInbox" class="ml-1 mr-1 px-3 py-1 bg-cyan-800 text-white rounded">Inbox</button> 
-        <button v-if="role === 'user'" @click="sendMessage" class="ml-1 mr-1 px-3 py-1 bg-cyan-800 text-white rounded">Send a message</button> 
+        <button v-if="role === 'user'" @click="sendMessage" class="ml-1 mr-1 px-3 py-1 bg-cyan-800 text-white rounded">Send a message</button>
+        <button v-if="role === 'user'" @click="watchMap" class="ml-1 mr-1 px-3 py-1 bg-cyan-800 text-white rounded">Find a store</button>  
       
     <h2 class="text-2xl font-bold tracking-tight text-gray-900">Featured Watches</h2>
 
@@ -144,6 +145,9 @@ const goToInbox = () => {
 
 const sendMessage = () =>{
     router.push('/send')
+}
+const watchMap = () =>{
+   router.push('/map')
 }
 
 onMounted(() => {

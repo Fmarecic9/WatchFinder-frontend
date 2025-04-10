@@ -8,6 +8,7 @@ import editWatchForm from './components/editWatchForm.vue'
 import userProfile from './components/userProfile.vue'
 import adminInbox from './components/inboxMessages.vue'
 import userMessages from './components/sendMessage.vue'
+import watchMap from './components/watchMap.vue'
 
 const routes = [
     {path: '/', redirect: '/home'},
@@ -19,7 +20,9 @@ const routes = [
     {path: '/editWatch/:id', name: 'editWatch', component: editWatchForm},
     {path: '/profile', name: 'userProfile', component: userProfile},
     {path: '/inbox', name: 'adminInbox', component: adminInbox},
-    {path: '/send', name: 'userMessages', component: userMessages}
+    {path: '/send', name: 'userMessages', component: userMessages},
+    {path: '/map', name: 'watchMap', component: watchMap}
+
 
 
 ]

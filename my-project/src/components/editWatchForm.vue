@@ -52,11 +52,6 @@
 
         <div class="grid grid-cols-3 gap-4">
           <div class="flex flex-col">
-            <label class="text-gray-700 font-medium">Bracelet Diameter:</label>
-            <input v-model="watch.braceletDiameter" placeholder="Bracelet Diameter"
-                   class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />
-          </div>
-          <div class="flex flex-col">
             <label class="text-gray-700 font-medium">Weight (grams):</label>
             <input v-model="watch.weight" placeholder="Weight"
                    class="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500" />

@@ -1,7 +1,7 @@
 <template>
 <div class="bg-gray-700">
       <div class="text-center">
-        <h1 class="text-2xl font-medium center text-white">WatchFinder</h1>
+        <h1 class="text-2xl font-medium center text-white pt-15">WatchFinder</h1>
        <div v-if="user" class="text-right text-white font-medium">
             <button @click="goToProfile" class="mr-1">View profile</button>
             <button @click="logout" class="ml-1">Logout</button>

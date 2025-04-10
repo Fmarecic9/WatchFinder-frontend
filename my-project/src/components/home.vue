@@ -1,11 +1,16 @@
 <template> 
     <div>
         <hr>
-          <watches class="bg-gray-200"/>
+          <watches/>
     </div>
 
 
 </template>
+
+<style scoped>
+
+
+</style>
 
 <script setup>
 import watches from './watches.vue'

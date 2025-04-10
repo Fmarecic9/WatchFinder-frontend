@@ -1,36 +1,81 @@
 <template>
-  <div v-if="watch" class="bg-gray-200 p-4 rounded-md">
-     <button @click="goBack" class="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Back</button>
-    <h1>{{ watch.brand }} {{ watch.model }}</h1>
-    <span v-for="(image, index) in watch.images" :key="index" class="bg-white">
-      <img :src="image" alt="Watch Image" style="width: 300px; height: auto;" class="rounded-md object-cover bg-white mb-3" />
-      </span> 
-      <strong><p>{{ watch.price }}€</p></strong>
-     
-    <p>Color: {{ watch.color }}</p>
-    <p>Type: {{ watch.type }}</p>
-    <p>Dimensions: {{ watch.dimensions.length }}x{{ watch.dimensions.width }}x{{ watch.dimensions.height }} mm</p>
+  <div class="centered-container">
+    <div v-if="watch" class="content">
+      <button @click="goBack" class="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Back</button>
+      <h1>{{ watch.brand }} {{ watch.model }}</h1>
+      
+      <!-- Updated Image Layout -->
+      <div class="image-grid">
+        <span v-for="(image, index) in watch.images" :key="index" class="image-item">
+          <img :src="image" alt="Watch Image" />
+        </span>
+      </div>
 
-    <div v-if="role">
-      <button @click="addToWishlist(watch._id)" class="mt-4 px-6 py-2 font-semibold rounded-md border border-black-800 text-gray-900 bg-blue-500 text-white">
-        Add to Wishlist
-      </button>
-      <button @click="addToOwnedWatches(watch._id)" class="mt-4 px-6 py-2 font-semibold rounded-md border border-black-800 text-gray-900 bg-blue-500 text-white">
-        Add to Owned Watches
-      </button>
+      <strong><p>{{ watch.price }}€</p></strong>
+      <p>Color: {{ watch.color }}</p>
+      <p>Type: {{ watch.type }}</p>
+      <p>Dimensions: {{ watch.dimensions.length }}x{{ watch.dimensions.width }}x{{ watch.dimensions.height }} mm</p>
+      <p>Weight: {{ watch.weight }}g</p>
+      <div v-if="role">
+        <button @click="addToWishlist(watch._id)" class="mt-4 px-6 py-2 font-semibold rounded-md border border-black-800 text-gray-900 bg-cyan-800 text-white">
+          Add to Wishlist
+        </button>
+        <button @click="addToOwnedWatches(watch._id)" class="mt-4 px-6 py-2 font-semibold rounded-md border border-black-800 text-gray-900 bg-cyan-800 text-white">
+          Add to Owned Watches
+        </button>
+      </div>
+      
+      <p class="mt-2 text-sm text-gray-600">Features:</p>
+      <ul>
+        <li v-for="(feature, index) in watch.features" :key="index" class="text-gray-700">
+          {{ feature }}
+        </li>
+      </ul>
     </div>
-    <p class="mt-2 text-sm text-gray-600">Features:</p>
-    <ul>
-      <li v-for="(feature, index) in watch.features" :key="index" class="text-gray-700">
-        {{ feature }}
-      </li>
-    </ul>
-  </div>
-  <div v-else>
-    <p>Loading watch details...</p>
+    <div v-else>
+      <p>Loading watch details...</p>
+    </div>
   </div>
 </template>
 
+
+<style scoped>
+  .centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; 
+    padding: 20px;
+  }
+
+  .content {
+    background: #f3f4f6;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    max-width: 600px;  
+  }
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px; 
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-item {
+    background: white;
+    padding: 5px;
+    border-radius: 8px;
+  }
+
+  .image-item img {
+    width: 100%; 
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+</style>
 
 
 <script setup>

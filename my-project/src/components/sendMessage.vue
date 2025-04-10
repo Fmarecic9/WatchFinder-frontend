@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+  <div v-if="user" class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
     <button @click="goBack" class="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Back</button>
 
     <h2 class="text-2xl font-bold text-gray-800 mb-4">Send a Suggestion</h2>
@@ -16,7 +16,10 @@
       </button>
     </form>
 
-    <p v-if="feedback" class="mt-4 text-green-500 font-medium">{{ feedback }}</p>
+  </div>
+  <div v-else>
+    <button @click="goBack" class="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Back</button>
+    <h1 class="text-xl font-semibold">⚠ You are not logged in</h1>
   </div>
 </template>
 
@@ -28,7 +31,7 @@ import {useRouter} from 'vue-router'
 import {ref,onMounted} from 'vue'
 
 const router = useRouter()
-let user = ref(null)
+let user = ref(localStorage.getItem("user"))
 let message = ref(null)
 
 const token = localStorage.getItem("token")

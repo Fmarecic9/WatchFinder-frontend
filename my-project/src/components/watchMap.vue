@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="user">
      <button @click="goBack" class="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Back</button>
     <h2 class="text-2xl font-bold text-gray-800 mb-4">Jewelry stores near you: </h2>
     <label for="country">Select Country:</label>
@@ -12,6 +12,10 @@
 
     <div ref="mapContainer" class="map-container"></div>
   </div>
+  <div v-else>
+    <button @click="goBack" class="mb-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Back</button>
+    <h1 class="text-xl font-semibold">⚠ You are not logged in</h1>
+  </div>
 </template>
 
 <script setup>
@@ -19,9 +23,10 @@ import { ref, onMounted } from 'vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {useRouter} from 'vue-router'
-
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let user = ref(localStorage.getItem("user"))
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({

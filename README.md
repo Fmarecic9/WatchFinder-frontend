@@ -42,7 +42,7 @@ Aplikacija za pronalazak ručnih satova
 
 
 ### Javni hosting link:
-
+https://watchfinder.netlify.app
 
 ## Login podaci za testiranje
 #### User: 

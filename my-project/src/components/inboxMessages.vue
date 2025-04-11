@@ -34,6 +34,7 @@ import axios from 'axios'
 import {useRouter} from 'vue-router'
 import {ref, onMounted} from 'vue'
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 let user = ref(null)
 let role = ref(null)
@@ -44,7 +45,7 @@ const token = localStorage.getItem("token")
 
 onMounted (async()=>{
     try{
-        let response = await axios.get('http://localhost:3000/inbox', 
+        let response = await axios.get(`${baseUrl}/inbox`, 
         {headers: { Authorization: `Bearer ${token}` }})
         
         role.value = localStorage.getItem("role")
@@ -59,7 +60,7 @@ const removeMsg = async(msgId) =>{
     let confirmed = confirm("Are you sure you want to delete this message")
     if (!confirmed){return}
     try{
-        await axios.delete(`http://localhost:3000/inbox/${msgId}`,  
+        await axios.delete(`${baseUrl}/inbox/${msgId}`,  
         {headers: { Authorization: `Bearer ${token}` }})
         window.location.reload()
     }

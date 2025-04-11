@@ -84,6 +84,7 @@ import axios from 'axios'
 import { useRoute } from 'vue-router';
 import {useRouter} from 'vue-router'
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const route = useRoute()
 const router = useRouter()
 
@@ -101,7 +102,7 @@ const goBack = () =>{
 
 onMounted(async()=>{
     try{
-        let response = await axios.get(`http://localhost:3000/watches/${idWatch}`)
+        let response = await axios.get(`${baseUrl}/watches/${idWatch}`)
         watch.value = response.data.watch
     }
     catch(e){
@@ -111,7 +112,7 @@ onMounted(async()=>{
 
 const addToWishlist = async(idWatch) =>{
   try{
-      await axios.post(`http://localhost:3000/profile/wishlist/${idWatch}`, 
+      await axios.post(`${baseUrl}/profile/wishlist/${idWatch}`, 
       {},
       { headers: { Authorization: `Bearer ${token}` }})
       alert("Added to wishlist")
@@ -124,7 +125,7 @@ const addToWishlist = async(idWatch) =>{
 
 const addToOwnedWatches = async(idWatch) =>{
   try{
-      await axios.post(`http://localhost:3000/profile/owned/${idWatch}`, 
+      await axios.post(`${baseUrl}/profile/owned/${idWatch}`, 
       {},
       { headers: { Authorization: `Bearer ${token}` }})
       alert("Added to owned watches")

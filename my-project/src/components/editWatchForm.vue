@@ -120,6 +120,7 @@ import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios';
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const router = useRouter()
 const route = useRoute()
@@ -132,7 +133,7 @@ const token = localStorage.getItem("token")
 let watchId = route.params.id
 onMounted (async()=>{
     try{
-    let response = await axios.get(`http://localhost:3000/watches/${watchId}`)
+    let response = await axios.get(`${baseUrl}/watches/${watchId}`)
         watch.value = response.data.watch;
     }
     catch(e){
@@ -145,7 +146,7 @@ const editWatch = async(watchId) => {
         const updatedWatch = { ...watch.value }
         delete updatedWatch._id
 
-        await axios.patch(`http://localhost:3000/watches/${watchId}`, updatedWatch, 
+        await axios.patch(`${baseUrl}/watches/${watchId}`, updatedWatch, 
          { headers: { Authorization: `Bearer ${token}` }})
         alert("Watch updated successfully!")
         router.push('/home')

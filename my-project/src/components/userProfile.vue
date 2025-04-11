@@ -51,6 +51,7 @@ import axios from 'axios'
 import {useRoute, useRouter} from 'vue-router'
 import {ref, onMounted} from 'vue'
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const router = useRouter()
 const route = useRoute()
 
@@ -66,7 +67,7 @@ const token = localStorage.getItem("token")
 
 onMounted (async()=>{
     try{
-        let response = await axios.get('http://localhost:3000/profile',
+        let response = await axios.get(`${baseUrl}/profile`,
          { headers: { Authorization: `Bearer ${token}` }})
 
         ownedWatches.value = response.data.ownedWatches || []
@@ -82,7 +83,7 @@ const removeFromWishlist = async(idWatch) =>{
     const confirmed = confirm("Are you sure you want to remove watch from wishlist?")
     if (!confirmed){ return }
     try{
-        axios.patch(`http://localhost:3000/profile/wishlist/${idWatch}`, {}, 
+        axios.patch(`${baseUrl}/profile/wishlist/${idWatch}`, {}, 
         { headers: { Authorization: `Bearer ${token}` }})
         window.location.reload()
     }
@@ -95,7 +96,7 @@ const removeFromOwned = async(idWatch) =>{
     const confirmed = confirm("Are you sure you want to remove watch from owned watches?")
     if (!confirmed){ return }
     try{
-        axios.patch(`http://localhost:3000/profile/owned/${idWatch}`, {},
+        axios.patch(`${baseUrl}/profile/owned/${idWatch}`, {},
         { headers: { Authorization: `Bearer ${token}` }})
         window.location.reload()
   

@@ -79,6 +79,7 @@ import {ref, onMounted } from 'vue'
 import {useRoute, useRouter} from 'vue-router'
 import axios from 'axios'
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const route = useRoute()
 const router = useRouter()
 
@@ -100,7 +101,7 @@ const fetchWatches = (async()=>{
     try{
     const token = localStorage.getItem('token');
         
-    let res = await axios.get('http://localhost:3000/watches', 
+    let res = await axios.get(`${baseUrl}/watches`, 
       {headers: { Authorization: `Bearer ${token}` },
       params: {
         brand: filters.value.brand || undefined,
@@ -126,7 +127,7 @@ const deleteWatch = async(id) => {
     const isConfirmed = confirm("Are you sure you want to delete this watch?");
     if (!isConfirmed) return
     try{
-        await axios.delete(`http://localhost:3000/watches/${id}`, 
+        await axios.delete(`${baseUrl}/watches/${id}`, 
         { headers: { Authorization: `Bearer ${token}` }})
         window.location.reload();
     }

@@ -30,6 +30,7 @@ import axios from 'axios'
 import {useRouter} from 'vue-router'
 import {ref,onMounted} from 'vue'
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const router = useRouter()
 let user = ref(localStorage.getItem("user"))
 let message = ref(null)
@@ -45,7 +46,7 @@ const sendMessage = async() => {
         message: message.value
     }
     try{
-        await axios.post('http://localhost:3000/inbox', newMessage,
+        await axios.post(`${baseUrl}/inbox`, newMessage,
         {headers: { Authorization: `Bearer ${token}` }})
         alert("Message posted")
         window.location.reload()

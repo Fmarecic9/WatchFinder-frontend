@@ -44,6 +44,8 @@ import axios from 'axios'
 import {ref, onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
 let username = ref("")
 let password = ref("")
 
@@ -55,7 +57,7 @@ const userLogin = async() =>{
         password: password.value
     }
     try{
-        let response = await axios.post('http://localhost:3000/users/login', loginData)
+        let response = await axios.post(`${baseUrl}/users/login`, loginData)
     
         username.value = ""
         password.value = ""

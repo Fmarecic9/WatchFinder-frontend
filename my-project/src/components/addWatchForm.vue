@@ -68,6 +68,8 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import {useRouter} from 'vue-router'
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
 let role = ref(localStorage.getItem("role"))
 const router = useRouter()
 
@@ -123,7 +125,7 @@ const addWatch = async () => {
   try {
     const token = localStorage.getItem("token")
    
-    await axios.post('http://localhost:3000/watches', watch.value, 
+    await axios.post(`${baseUrl}/watches`, watch.value, 
     {headers: { Authorization: `Bearer ${token}`}});
 
     role.value = localStorage.getItem("role")

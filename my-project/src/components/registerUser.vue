@@ -58,6 +58,8 @@ import axios from 'axios'
 import {ref, onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
+
 const router = useRouter()
 
 let username = ref("")
@@ -71,7 +73,7 @@ const registerUser = async() => {
         password: password.value,
     }
     try{
-        await axios.post('http://localhost:3000/users/register', newUser)
+        await axios.post(`${baseUrl}/users/register`, newUser)
         username.value = ""
         email.value = ""
         password.value = ""
